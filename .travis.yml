@@ -1,0 +1,16 @@
+# используем язык java. Travis CI поддерживает другие языки тоже.
+language: java
+jdk:
+  - openjdk14
+
+env:
+  global:
+    CODECOV_TOKEN="c4e65d1f-03e7-4b27-bd5a-fe7a1756c298"
+
+# Отправлять уведомление на почту если сборка упала
+notifications:
+  email:
+    recipients:
+      Meng263@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
