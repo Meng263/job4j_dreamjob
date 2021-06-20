@@ -39,7 +39,7 @@
                 <td>Описание</td>
                 <td>Опубликована</td>
             </tr>
-            <% Collection<Post> elements = Store.instOf().findAll(); %>
+            <% Collection<Post> elements = Store.instOf().findAllPosts(); %>
             <% for (Post post : elements) { %>
             <tr>
                 <td><%= post.getName() %>
