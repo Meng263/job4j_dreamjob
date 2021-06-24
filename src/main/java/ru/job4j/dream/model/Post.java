@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class Post {
-    private final int id;
+    private int id;
     private String name;
     private String description;
     private final LocalDateTime created;
@@ -16,6 +16,16 @@ public class Post {
         this.name = name;
         this.description = description;
         this.created = LocalDateTime.now();
+    }
+
+    public Post(int id, String name) {
+        this.id = id;
+        this.name = name;
+        this.created = LocalDateTime.now();
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
