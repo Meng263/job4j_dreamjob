@@ -47,8 +47,10 @@
                                 </a>
                                 <i class="fa fa-trash"
                                    onclick="fetch('<c:url value="/candidates.do?id=${candidate.id}&delete=true"/>',
-                                           {method: 'POST'});
-                                           document.location.reload();
+                                           {method: 'POST'})
+                                           .then(value =>
+                                           document.location.reload()
+                                           );
                                            "></i>
                                 <c:out value="${candidate.name}"/>
                             </td>
