@@ -45,6 +45,11 @@
                                 <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
+                                <i class="fa fa-trash"
+                                   onclick="fetch('<c:url value="/candidates.do?id=${candidate.id}&delete=true"/>',
+                                           {method: 'POST'});
+                                           document.location.reload();
+                                           "></i>
                                 <c:out value="${candidate.name}"/>
                             </td>
                         </tr>
