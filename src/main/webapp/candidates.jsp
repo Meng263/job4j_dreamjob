@@ -59,7 +59,10 @@
                                      height="100px" width="150px">
                             </td>
                             <td>
-                                <button value="Add photo" onclick="">Добавить фото</button>
+                                <button value="Add photo" onclick="
+                                        document.location.href = '<c:url value="/upload_image.jsp?name=${candidate.id}"/>'
+                                        ">Добавить фото
+                                </button>
                             </td>
                             <td>
                                 <button value="Remove photo" onclick="

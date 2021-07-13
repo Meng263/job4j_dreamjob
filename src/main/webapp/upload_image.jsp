@@ -17,15 +17,12 @@
         <tbody>
         <tr valign="top">
             <td>
-                <form action="<c:url value='/image?name=1'/>" method="post" enctype="multipart/form-data">
+                <form action="<c:url value='/image?name=${param.name}'/>" method="post" enctype="multipart/form-data">
                     <div class="checkbox">
                         <input type="file" name="file">
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
-            </td>
-            <td>
-                <img src="<c:url value='/image?name=1'/>" width="100px" height="100px"/>
             </td>
         </tr>
         </tbody>
