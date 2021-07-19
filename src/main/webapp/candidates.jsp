@@ -45,7 +45,35 @@
                                 <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
+                                <i class="fa fa-trash"
+                                   onclick="fetch('<c:url value="/candidates.do?id=${candidate.id}"/>',
+                                           {method: 'DELETE'})
+                                           .then(value =>
+                                           document.location.reload()
+                                           );
+                                           "></i>
                                 <c:out value="${candidate.name}"/>
+                            </td>
+                            <td>
+                                <img src='<c:url value="/image?name=${candidate.id}"/>' alt="image_${candidate.id}"
+                                     height="100px" width="150px">
+                            </td>
+                            <td>
+                                <button value="Add photo" onclick="
+                                        document.location.href = '<c:url value="/upload_image.jsp?name=${candidate.id}"/>'
+                                        ">Добавить фото
+                                </button>
+                            </td>
+                            <td>
+                                <button value="Remove photo" onclick="
+                                        fetch(
+                                        '<c:url value="/image?name=${candidate.id}"/>',
+                                        {method: 'DELETE'})
+                                        .then(value =>
+                                        document.location.reload()
+                                        );
+                                        ">Удалить фото
+                                </button>
                             </td>
                         </tr>
                     </c:forEach>
