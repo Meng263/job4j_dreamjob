@@ -11,6 +11,11 @@ public class Candidate {
         this.name = name;
     }
 
+    public Candidate(String name) {
+        this.id = -1;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
@@ -39,5 +44,13 @@ public class Candidate {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
