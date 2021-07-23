@@ -1,6 +1,8 @@
 package ru.job4j.dream.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
 
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class PsqlStore implements Store {
+    private final Logger logger = LogManager.getLogger(PsqlStore.class.getName());
     private final BasicDataSource pool = new BasicDataSource();
 
     public PsqlStore() {
@@ -65,7 +68,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            logger.error(sqlException);
         }
         return posts;
     }
@@ -85,14 +88,14 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            logger.error(sqlException);
         }
         return candidates;
     }
 
     @Override
     public Post save(Post post) {
-        if (post.getId() == -1) {
+        if (post.getId() == 0) {
             return create(post);
         } else {
             update(post);
@@ -112,7 +115,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return post;
     }
@@ -124,13 +127,13 @@ public class PsqlStore implements Store {
             ps.setInt(2, post.getId());
             ps.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
     @Override
     public Candidate save(Candidate candidate) {
-        if (candidate.getId() == -1) {
+        if (candidate.getId() == 0) {
             return create(candidate);
         } else {
             update(candidate);
@@ -150,7 +153,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return candidate;
     }
@@ -162,7 +165,7 @@ public class PsqlStore implements Store {
             ps.setInt(2, candidate.getId());
             ps.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
@@ -174,7 +177,7 @@ public class PsqlStore implements Store {
         ) {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
-                while (resultSet.next()) {
+                if (resultSet.next()) {
                     post = new Post(
                             resultSet.getInt("id"),
                             resultSet.getString("name")
@@ -182,7 +185,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            logger.error(sqlException);
         }
         return post;
     }
@@ -195,7 +198,7 @@ public class PsqlStore implements Store {
         ) {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
-                while (resultSet.next()) {
+                if (resultSet.next()) {
                     candidate = new Candidate(
                             resultSet.getInt("id"),
                             resultSet.getString("name")
@@ -203,7 +206,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            logger.error(sqlException);
         }
         return candidate;
     }

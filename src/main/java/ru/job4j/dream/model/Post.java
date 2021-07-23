@@ -25,7 +25,6 @@ public class Post {
     }
 
     public Post(String name) {
-        this.id = -1;
         this.name = name;
         this.created = LocalDateTime.now();
     }
