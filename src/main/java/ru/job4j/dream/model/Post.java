@@ -24,6 +24,11 @@ public class Post {
         this.created = LocalDateTime.now();
     }
 
+    public Post(String name) {
+        this.name = name;
+        this.created = LocalDateTime.now();
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -72,5 +77,15 @@ public class Post {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", created=" + created +
+                '}';
     }
 }
