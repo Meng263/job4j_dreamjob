@@ -1,5 +1,8 @@
 package ru.job4j.dream.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,6 +11,7 @@ import java.nio.file.Path;
 
 public class CandidateImageService {
     private final Path imageRoot = new File(System.getProperty("user.home")).toPath().resolve("candidate_images");
+    private final Logger logger = LogManager.getLogger(CandidateImageService.class.getName());
 
     private CandidateImageService() {
         imageRoot.toFile().mkdirs();
@@ -30,7 +34,7 @@ public class CandidateImageService {
             try {
                 return Files.readAllBytes(image);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage(), e);
             }
         }
         return null;
@@ -40,7 +44,7 @@ public class CandidateImageService {
         try {
             Files.delete(imageRoot.resolve(fileName + ".png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 }

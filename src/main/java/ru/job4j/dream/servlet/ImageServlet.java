@@ -4,7 +4,10 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.job4j.dream.service.CandidateImageService;
+import ru.job4j.dream.store.PsqlStore;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ImageServlet extends HttpServlet {
+    private final Logger logger = LogManager.getLogger(ImageServlet.class.getName());
     private final CandidateImageService service = CandidateImageService.instOf();
 
     @Override
@@ -40,7 +44,7 @@ public class ImageServlet extends HttpServlet {
                 service.saveImage(name, items.get(0).getInputStream());
             }
         } catch (FileUploadException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
 
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
