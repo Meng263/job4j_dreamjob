@@ -2,7 +2,8 @@ package ru.job4j.dream.servlet;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.service.CandidateImageService;
-import ru.job4j.dream.store.MemStore;
+import ru.job4j.dream.store.PsqlStore;
+import ru.job4j.dream.store.Store;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CandidateServlet extends HttpServlet {
-    private final MemStore store = MemStore.instOf();
+    private final Store store = PsqlStore.instOf();
     private final CandidateImageService service = CandidateImageService.instOf();
 
     @Override
