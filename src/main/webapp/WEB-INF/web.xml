@@ -4,7 +4,6 @@
 
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
-
     <servlet>
         <servlet-name>PostServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.PostServlet</servlet-class>
@@ -21,6 +20,10 @@
         <servlet-name>ImageServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.ImageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AuthServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.AuthServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PostServlet</servlet-name>
         <url-pattern>/posts.do</url-pattern>
@@ -36,5 +39,9 @@
     <servlet-mapping>
         <servlet-name>ImageServlet</servlet-name>
         <url-pattern>/image</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthServlet</servlet-name>
+        <url-pattern>/auth.do</url-pattern>
     </servlet-mapping>
 </web-app>
