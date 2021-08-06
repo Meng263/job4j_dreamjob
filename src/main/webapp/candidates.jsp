@@ -25,63 +25,91 @@
 </head>
 <body>
 <div class="container pt-3">
-
     <div class="row">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                Кандидаты
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Названия</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${candidates}" var="candidate">
+        <div class="row">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить
+                        кандидата</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">
+                        <c:choose>
+                            <c:when test="${sessionScope.user != null}">
+                                <c:out value="${sessionScope.user.name}"/> | Сменить пользователя
+                            </c:when>
+                            <c:otherwise>Войти</c:otherwise>
+                        </c:choose>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="card" style="width: 100%">
+                <div class="card-header">
+                    Кандидаты
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>
-                                <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
-                                    <i class="fa fa-edit mr-3"></i>
-                                </a>
-                                <i class="fa fa-trash"
-                                   onclick="fetch('<c:url value="/candidates.do?id=${candidate.id}"/>',
-                                           {method: 'DELETE'})
-                                           .then(value =>
-                                           document.location.reload()
-                                           );
-                                           "></i>
-                                <c:out value="${candidate.name}"/>
-                            </td>
-                            <td>
-                                <img src='<c:url value="/image?name=${candidate.id}"/>' alt="image_${candidate.id}"
-                                     height="100px" width="150px">
-                            </td>
-                            <td>
-                                <button value="Add photo" onclick="
-                                        document.location.href = '<c:url value="/upload_image.jsp?name=${candidate.id}"/>'
-                                        ">Добавить фото
-                                </button>
-                            </td>
-                            <td>
-                                <button value="Remove photo" onclick="
-                                        fetch(
-                                        '<c:url value="/image?name=${candidate.id}"/>',
-                                        {method: 'DELETE'})
-                                        .then(value =>
-                                        document.location.reload()
-                                        );
-                                        ">Удалить фото
-                                </button>
-                            </td>
+                            <th scope="col">Названия</th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${candidates}" var="candidate">
+                            <tr>
+                                <td>
+                                    <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
+                                        <i class="fa fa-edit mr-3"></i>
+                                    </a>
+                                    <i class="fa fa-trash"
+                                       onclick="fetch('<c:url value="/candidates.do?id=${candidate.id}"/>',
+                                               {method: 'DELETE'})
+                                               .then(value =>
+                                               document.location.reload()
+                                               );
+                                               "></i>
+                                    <c:out value="${candidate.name}"/>
+                                </td>
+                                <td>
+                                    <img src='<c:url value="/image?name=${candidate.id}"/>' alt="image_${candidate.id}"
+                                         height="100px" width="150px">
+                                </td>
+                                <td>
+                                    <button value="Add photo" onclick="
+                                            document.location.href = '<c:url
+                                            value="/upload_image.jsp?name=${candidate.id}"/>'
+                                            ">Добавить фото
+                                    </button>
+                                </td>
+                                <td>
+                                    <button value="Remove photo" onclick="
+                                            fetch(
+                                            '<c:url value="/image?name=${candidate.id}"/>',
+                                            {method: 'DELETE'})
+                                            .then(value =>
+                                            document.location.reload()
+                                            );
+                                            ">Удалить фото
+                                    </button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>
