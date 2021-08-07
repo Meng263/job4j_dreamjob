@@ -17,6 +17,8 @@ public interface Store {
 
     User findUserById(int id);
 
+    User findUserByEmail(String email);
+
     Post save(Post post);
 
     Candidate save(Candidate post);
