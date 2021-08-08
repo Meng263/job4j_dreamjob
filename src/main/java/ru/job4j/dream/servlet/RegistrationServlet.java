@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
 
 public class RegistrationServlet extends HttpServlet {
     @Override
@@ -21,11 +19,7 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        Map<String, String[]> parameters = req.getParameterMap();
-        if (!validate(parameters)) {
-            onError(req, resp, "Одно или несколько полей пустые и/или пароли не совпадают");
-            return;
-        }
+
         Store store = PsqlStore.instOf();
         User user = store.save(new User(req.getParameter("name"),
                 req.getParameter("email"),
@@ -40,15 +34,5 @@ public class RegistrationServlet extends HttpServlet {
     private void onError(HttpServletRequest req, HttpServletResponse resp, String message) throws ServletException, IOException {
         req.setAttribute("error", message);
         req.getRequestDispatcher("registration.jsp").forward(req, resp);
-    }
-
-    private boolean validate(Map<String, String[]> parameters) {
-        String password = Arrays.stream(parameters.get("password")).findFirst().orElse("");
-        String confirm_password = Arrays.stream(parameters.get("confirm_password")).findFirst().orElse("");
-
-        return parameters.values().stream()
-                .flatMap(Arrays::stream)
-                .noneMatch(String::isBlank) &&
-                password.equals(confirm_password);
     }
 }

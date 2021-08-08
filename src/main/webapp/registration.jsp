@@ -40,13 +40,13 @@
                 <form action="<%=request.getContextPath()%>/registration.do" method="post">
                     <div class="form-group">
                         <label>Имя пользователя</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" required>
                         <label>Почта</label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" name="email" required>
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="text" class="form-control" name="password" required>
                         <label>Подтверждение пароля</label>
-                        <input type="text" class="form-control" name="confirm_password">
+                        <input type="text" class="form-control" name="confirm_password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Войти</button>
                     <c:if test="${requestScope['error'] != null}">
