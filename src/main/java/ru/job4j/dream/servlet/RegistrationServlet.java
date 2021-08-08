@@ -20,14 +20,13 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Store store = PsqlStore.instOf();
-
+        req.setCharacterEncoding("UTF-8");
         Map<String, String[]> parameters = req.getParameterMap();
-
         if (!validate(parameters)) {
             onError(req, resp, "Одно или несколько полей пустые и/или пароли не совпадают");
             return;
         }
+        Store store = PsqlStore.instOf();
         User user = store.save(new User(req.getParameter("name"),
                 req.getParameter("email"),
                 req.getParameter("password")));
