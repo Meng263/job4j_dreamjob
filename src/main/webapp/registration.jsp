@@ -1,7 +1,13 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: oleg
+  Date: 08.08.2021
+  Time: 11:43
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
-<!doctype html>
-<html lang="en">
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -28,17 +34,19 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Авторизация
+                Регистрация
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/auth.do" method="post">
+                <form action="<%=request.getContextPath()%>/registration.do" method="post">
                     <div class="form-group">
+                        <label>Имя пользователя</label>
+                        <input type="text" class="form-control" name="name">
                         <label>Почта</label>
                         <input type="text" class="form-control" name="email">
-                    </div>
-                    <div class="form-group">
                         <label>Пароль</label>
                         <input type="text" class="form-control" name="password">
+                        <label>Подтверждение пароля</label>
+                        <input type="text" class="form-control" name="confirm_password">
                     </div>
                     <button type="submit" class="btn btn-primary">Войти</button>
                     <c:if test="${requestScope['error'] != null}">
@@ -47,12 +55,6 @@
                         </div>
                     </c:if>
                 </form>
-
-                <a class="nav-link" href="<%=request.getContextPath()%>/registration.do">
-                    <label>
-                        Регистрация
-                    </label>
-                </a>
             </div>
         </div>
     </div>

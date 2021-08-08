@@ -261,6 +261,8 @@ public class PsqlStore implements Store {
              PreparedStatement ps = cn.prepareStatement("INSERT INTO users (name, email, password) VALUES (?, ? ,?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
